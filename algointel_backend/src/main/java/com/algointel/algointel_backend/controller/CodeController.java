@@ -8,22 +8,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.algointel.algointel_backend.dto.AnalysisResponse;
 import com.algointel.algointel_backend.dto.CodeRequest;
-import com.algointel.algointel_backend.service.CodeService;
+import com.algointel.algointel_backend.service.AIService;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class CodeController {
 
-    private final CodeService codeService;
+    // private final CodeService codeService;
+    private final AIService aiService;
 
-    public CodeController(CodeService codeService) {
-        this.codeService = codeService;
+    public CodeController(AIService aiService) {
+        this.aiService = aiService;
     }
 
     @PostMapping("/analyze")
     public AnalysisResponse analyzeCode(@RequestBody CodeRequest request) {
-        return codeService.analyzeCode(request);
+        return aiService.analyzeCode(request.getCode());
     }
 
 }
