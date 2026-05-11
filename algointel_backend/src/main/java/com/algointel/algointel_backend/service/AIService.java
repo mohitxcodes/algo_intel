@@ -30,12 +30,21 @@ public class AIService {
                 
                 Respond with ONLY valid JSON with no markdown formatting. Do not include ```json or ``` tags. The JSON should have exactly the following structure:
                 {
-                  "approach": "A detailed explanation of the approach used in the code.",
-                  "timeComplexity": "Big O notation for time complexity (e.g. O(N)).",
-                  "spaceComplexity": "Big O notation for space complexity (e.g. O(1)).",
-                  "summary": "A brief summary of what the code does.",
-                  "improvements": ["improvement 1", "improvement 2"]
+                  "approach": "A clear, concise explanation of the algorithmic approach used (2-3 sentences max).",
+                  "timeComplexity": "ONLY the Big O notation of the CURRENT code, e.g. O(n), O(n log n), O(n^2). Nothing else.",
+                  "suggestedTimeComplexity": "ONLY the Big O notation of the BEST OPTIMIZED version achievable, e.g. O(n), O(log n). If already optimal, return the same as timeComplexity.",
+                  "spaceComplexity": "ONLY the Big O notation of the CURRENT code, e.g. O(1), O(n). Nothing else.",
+                  "suggestedSpaceComplexity": "ONLY the Big O notation of the BEST OPTIMIZED version achievable, e.g. O(1). If already optimal, return the same as spaceComplexity.",
+                  "summary": "A brief 1-2 sentence summary of what the code does.",
+                  "improvements": ["short improvement suggestion 1", "short improvement suggestion 2"]
                 }
+
+                IMPORTANT RULES:
+                - timeComplexity, suggestedTimeComplexity, spaceComplexity, suggestedSpaceComplexity must contain ONLY Big O notation like O(n), O(1), O(n^2), O(n log n). No other text.
+                - suggestedTimeComplexity is the best possible time complexity if the code is optimized using a better algorithm/data structure.
+                - suggestedSpaceComplexity is the best possible space complexity if the code is optimized.
+                - Keep improvements concise (one sentence each).
+                - Keep approach to 2-3 sentences maximum.
                 
                 Code to analyze:
                 """ + code;
@@ -77,7 +86,9 @@ public class AIService {
         response.setSummary(message);
         response.setApproach("N/A");
         response.setTimeComplexity("N/A");
+        response.setSuggestedTimeComplexity("N/A");
         response.setSpaceComplexity("N/A");
+        response.setSuggestedSpaceComplexity("N/A");
         response.setImprovements(List.of("Service temporarily overloaded"));
         return response;
     }
